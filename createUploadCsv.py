@@ -2,7 +2,7 @@ import os
 import sys,csv
      
 def createCsv():
-	txtfile = open('../data/TBDress.txt','r')
+	txtfile = open('../data/CiciHot.txt','r')
 	os.mkdir("csv") 
 	for line in txtfile:
 		arr = line.split('|')
@@ -34,7 +34,7 @@ def hebing(fdir):
     file_list = os.listdir(fdir)
     start = str(file_list[0])[0:-4]
     end = str(file_list[-1])[0:-4]
-    fn = start + '-' + end + '-TBDress' + '.csv'
+    fn = start + '-' + end + '-CiciHot' + '.csv'
 
     file_to_write = file(fn,'w')
     file_to_write.write('post_id,post_type,post_thumbnail')

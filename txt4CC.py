@@ -11,7 +11,7 @@ import sys,csv,re
 from bs4 import BeautifulSoup
 
 def getLink():
-	txtfile = open('Shoespie.txt','r')
+	txtfile = open('../data/Jollychic.txt','r')
 
 	shoes = ['Heels','Heel','Sandals','Sandal','Boots','Boot','Booties','Bootie','Wedges','Wedge','Flats','Flat','Pumps','Pump','Sneaker','Sneakers','Slipper']
 	dress = ['dress','Dress','Dresses','dresses','jumpsuit','jumpsuits','Skirts','Skirt','rompers','romper']
@@ -20,6 +20,8 @@ def getLink():
 	clothing = ['tee','Jeggings','Maxi','Costume','Top','SheerLace','Blouse','Overcoat','Vest','Zentai','Denim','Cardigan','Corset','Bustier','Cape','Coats','Jacket','Blazer','Jumpsuit','Base Layer','Jeans','Sleepwear','Hoodies','Hoody','Knit','Knitwear','Tank','Tee','Shirt','Pant','Pants','Coat','Shorts','Bottom','Dancewear','Bodysuit','Suit','Cropped','Costume','Romper','Clubwear','Rave','Sweater','Outerwear','Outfit','Trousers']
 	swimsuits =['One-Piece','Two-Piece','Pucker','Back','Scrunch','Butt','Lace','swimwear','Animal','Print','Bling','Sequin','Fringe','Crochet','Flags','Patriotic','Push-Up','Padded','Bandeau','LBB','LBD','Bikinis','High-Waist','Bandeau']
 
+	os.mkdir('xml') 
+	os.mkdir("csv") 
 	for line in txtfile:
 		print 'please wait...'
 		arr = line.split('|')
@@ -35,28 +37,24 @@ def getLink():
 			print 'No.'+ str(arr[0]) +' is finish'
 		elif(set(arr2).intersection(set(dress))):
 			arrSize = ['S','M','L']
-			# the_type = list(set(arr2).intersection(set(dress)))
 			the_type = ['Dresses']
 			print arr[0]+' is dresssss!'
 			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print 'No.'+ str(arr[0]) +' is finish'
 		elif(set(arr2).intersection(set(intimates))):
-			arrSize = ['S','M','L']
-			# the_type = list(set(arr2).intersection(set(intimates)))
 			the_type = ['Intimates']
+			arrSize = ['S','M','L']
 			print arr[0]+' is intimates!'
 			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print 'No.'+ str(arr[0]) +' is finish'
 		elif(set(arr2).intersection(set(accessories))):
 			the_type = ['Accessories']
 			arrSize = ['ONE-SIZE']
-			# the_type = list(set(arr2).intersection(set(accessories)))
 			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print arr[0]+' is accessories!'	
 		elif(set(arr2).intersection(set(clothing))):
-			arrSize = ['S','M','L']
-			# the_type = list(set(arr2).intersection(set(clothing)))
 			the_type = ['Clothing']
+			arrSize = ['S','M','L']
 			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print arr[0]+' is clothing!'
 		elif(set(arr2).intersection(set(swimsuits))):
@@ -97,7 +95,6 @@ def createCsv(theid,imgLink):
 def createItem(a_title,a_id,a_price,a_old_price,arr_size,a_buylink,stock,a_type,a_details):
 	filename = 'xml/' + str(a_id) + '.xml'
 	f = open(filename, "w") 
-	
 	doc = minidom.Document() 
 	## item start
 	item = doc.createElement("item") 
@@ -162,9 +159,9 @@ def createItem(a_title,a_id,a_price,a_old_price,arr_size,a_buylink,stock,a_type,
 
 	category = doc.createElement("category")
 	category.setAttribute("domain", "brand") 
-	category.setAttribute("nicename", "Shoespie") 
+	category.setAttribute("nicename", "Jollychic") 
 	item.appendChild(category) 
-	cdata = doc.createCDATASection('Shoespie')
+	cdata = doc.createCDATASection('Jollychic')
 	category.appendChild(cdata)
 
 	# category = doc.createElement("category")

@@ -11,14 +11,15 @@ import sys,csv,re
 from bs4 import BeautifulSoup
 
 def getLink():
-	txtfile = open('../data/Jollychic.txt','r')
+	txtfile = open('../data/pinkbasis.txt','r')
+	# txtfile = open('data.txt','r')
 
-	shoes = ['Heels','Heel','Sandals','Sandal','Boots','Boot','Booties','Bootie','Wedges','Wedge','Flats','Flat','Pumps','Pump','Sneaker','Sneakers','Slipper']
-	dress = ['dress','Dress','Dresses','dresses','jumpsuit','jumpsuits','Skirts','Skirt','rompers','romper']
-	intimates = ['Lingerie','Corsets','Corset','Hosiery','Undergarment','Leggings','Legging','Pantyhose','Tights','Tight','Stockings','Stocking','Tutus','Tutu','Panties','Pantie','Thong','Boyshorts','Boyshort','Bra','Garter','Belt','Chemise','Teddy','Babydolls','Babydoll','Camis','Cami','Variety Teddies'] 
-	accessories = ['Cuff','Set','Handbagg','Cincher','Belt','Scarf','Body','Mask','Props','Pendant','Hairpin','Caps','Wig','Brooch','Bracelet','Backpack','Earrings','Eyelash','Fragrance','Clutches','Wallet','Hair','HEAD' 'BANDS','BAND','Handbag','Bag','Bags','Hat','Necklace','Ring','Scarves','Accessory','Sunglass','Sunglasses','Glasses','Watch','Watches','Gloves','Cosmetic']
-	clothing = ['tee','Jeggings','Maxi','Costume','Top','SheerLace','Blouse','Overcoat','Vest','Zentai','Denim','Cardigan','Corset','Bustier','Cape','Coats','Jacket','Blazer','Jumpsuit','Base Layer','Jeans','Sleepwear','Hoodies','Hoody','Knit','Knitwear','Tank','Tee','Shirt','Pant','Pants','Coat','Shorts','Bottom','Dancewear','Bodysuit','Suit','Cropped','Costume','Romper','Clubwear','Rave','Sweater','Outerwear','Outfit','Trousers']
-	swimsuits =['One-Piece','Two-Piece','Pucker','Back','Scrunch','Butt','Lace','swimwear','Animal','Print','Bling','Sequin','Fringe','Crochet','Flags','Patriotic','Push-Up','Padded','Bandeau','LBB','LBD','Bikinis','High-Waist','Bandeau']
+	shoes = ['heels','heel','sandals','sandal','boots','boot','booties','bootie','wedges','wedge','flats','flat','pumps','pump','sneaker','sneakers','slipper']
+	dress = ['dress','dresses','jumpsuit','jumpsuits','skirts','skirt','rompers','romper']
+	intimates = ['lingerie','corsets','corset','hosiery','undergarment','leggings','legging','pantyhose','tights','tight','stockings','stocking','tutus','tutu','panties','pantie','thong','boyshorts','boyshort','bra','garter','belt','chemise','teddy','babydolls','babydoll','camis','cami','variety teddies'] 
+	accessories = ['cuff','set','handbagg','cincher','belt','scarf','body','mask','props','pendant','hairpin','caps','wig','brooch','bracelet','backpack','earrings','eaelash','fragrance','clutches','wallet','hair','head' 'bands','band','handbag','bag','bags','hat','necklace','ring','scarves','accessory','sunglass','sunglasses','glasses','watch','watches','gloves','cosmetic']
+	clothing = ['tee','jeggings','Maxi','costume','top','sheerlace','blouse','overcoat','vest','zentai','denim','cardigan','corset','bustier','cape','coats','jacket','blazer','jumpsuit','base layer','jeans','sleepwear','hoodies','hoody','knit','knitwear','tank','tee','shirt','pant','pants','coat','shorts','bottom','dancewear','bodysuit','suit','cropped','costume','Romper','clubwear','Rave','sweater','outerwear','outfit','trousers']
+	swimsuits =['One-piece','two-piece','pucker','back','scrunch','butt','lace','swimwear','animal','print','bling','sequin','fringe','crochet','flags','patriotic','push-up','padded','bandeau','lbb','lbd','bikinis','high-waist','bandeau']
 
 	os.mkdir('xml') 
 	os.mkdir("csv") 
@@ -28,44 +29,50 @@ def getLink():
 		# print arr[11]
 		arr[1]= arr[1].replace('-',' ')
 		arr2 =  arr[1].split(' ')
-		if(set(arr2).intersection(set(shoes))):
+		arr3=[]
+		a = 0
+		for abc in arr2:
+			arr3.append(abc.lower())
+			a = a + 1
+		if(set(arr3).intersection(set(shoes))):
 			# the_type = list(set(arr2).intersection(set(shoes)))
 			the_type = ['Shoes']
 			arrSize = ['6','7','8']
 			print arr[0]+' is shoessss!'
 			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print 'No.'+ str(arr[0]) +' is finish'
-		elif(set(arr2).intersection(set(dress))):
+		elif(set(arr3).intersection(set(dress))):
 			arrSize = ['S','M','L']
 			the_type = ['Dresses']
 			print arr[0]+' is dresssss!'
 			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print 'No.'+ str(arr[0]) +' is finish'
-		elif(set(arr2).intersection(set(intimates))):
+		elif(set(arr3).intersection(set(intimates))):
 			the_type = ['Intimates']
 			arrSize = ['S','M','L']
 			print arr[0]+' is intimates!'
 			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print 'No.'+ str(arr[0]) +' is finish'
-		elif(set(arr2).intersection(set(accessories))):
+		elif(set(arr3).intersection(set(accessories))):
 			the_type = ['Accessories']
 			arrSize = ['ONE-SIZE']
 			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print arr[0]+' is accessories!'	
-		elif(set(arr2).intersection(set(clothing))):
+		elif(set(arr3).intersection(set(clothing))):
 			the_type = ['Clothing']
 			arrSize = ['S','M','L']
 			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print arr[0]+' is clothing!'
-		elif(set(arr2).intersection(set(swimsuits))):
+		elif(set(arr3).intersection(set(swimsuits))):
 			the_type = ['Swimsuits']
 			arrSize = ['S','M','L']
-			the_type = list(set(arr2).intersection(set(swimsuits)))
+			# the_type = list(set(arr2).intersection(set(swimsuits)))
 			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print arr[0]+' is swimsuits!'			
 		else:
 			arrSize = []
 			the_type = ['']
+			getData(arr[0],arr[1],arr[4],arr[6],arr[7],arr[8],arr[18],the_type,arrSize,arr[11])
 			print arr[0]+' both not'
 
 
@@ -142,7 +149,7 @@ def createItem(a_title,a_id,a_price,a_old_price,arr_size,a_buylink,stock,a_type,
 	post_id.appendChild(text)
 	post_date = doc.createElement("wp:post_date")
 	item.appendChild(post_date) 
-	text = doc.createTextNode("2014-03-2 14:40:25") 
+	text = doc.createTextNode("2014-03-5 20:30:0") 
 	post_date.appendChild(text)
 	status = doc.createElement("wp:status")
 	item.appendChild(status) 
@@ -159,16 +166,16 @@ def createItem(a_title,a_id,a_price,a_old_price,arr_size,a_buylink,stock,a_type,
 
 	category = doc.createElement("category")
 	category.setAttribute("domain", "brand") 
-	category.setAttribute("nicename", "Jollychic") 
+	category.setAttribute("nicename", "pinkbasis") 
 	item.appendChild(category) 
-	cdata = doc.createCDATASection('Jollychic')
+	cdata = doc.createCDATASection('pinkbasis')
 	category.appendChild(cdata)
 
 	# category = doc.createElement("category")
 	# category.setAttribute("domain", "collection") 
 	# category.setAttribute("nicename", "glitz-glam") 
 	# item.appendChild(category) 
-	# cdata = doc.createCDATASection('Glitz &amp; Glam')
+	# cdata = doc.createCDATASection('glitz &amp; Glam')
 	# category.appendChild(cdata)
 
 	if (a_type):
